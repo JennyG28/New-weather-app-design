@@ -1,0 +1,83 @@
+body {
+  margin: 20px auto;
+}
+.border-light {
+  height: 480px;
+  margin: 0 auto;
+  width: 672px;
+}
+
+.weather-app {
+  border: 1px solid #dadde1;
+  padding: 20px;
+  
+}
+.col-1 {
+  padding: 0;
+  text-align: center;
+  width: 68px;
+}
+.btn {
+  
+  padding: 6px 15px 6px 15px;
+  width: 60px;
+}
+
+#date {
+  font-family: 'Yeseva One', cursive;
+  padding: 8px 0;
+  text-align: right;
+  width: 210px;
+}
+
+.time {
+  font-size: 15px;
+  text-align: center;
+}
+
+.card-city{
+  font-family: 'Ranchers', cursive;
+  font-size: 50px;
+  width: 500px;
+}
+#weather-description {
+  font-family: "Oswald", sans-serif;
+  font-size: 35px;
+}
+  
+#temperature-number {
+  font-family: 'Yeseva One', cursive;
+  font-size: 40px;
+  text-align: center;
+}
+#celsius{
+  font-family: 'Yeseva One', cursive;
+}
+#fahrenheit{
+  font-family: 'Yeseva One', cursive;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+li {
+  font-size: 15px;
+}
+
+#wind {
+  font-size: 15px;
+}
+#humidity {
+  font-size: 15px;
+}
+#max-temp {
+  font-size: 15px;
+}
+#min-temp {
+  font-size: 15px;
+}
+#repository-link {
+  text-align: center;
+}

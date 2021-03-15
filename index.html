@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/stylesChange.css" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@500&family=Oswald:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ranchers&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>My Weather App</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card border-light">
+        <div class="weather-app">
+          <form class="row g-3" id="input-form">
+            <div class="col-5">
+              <input
+                type="search"
+                autofocus="on"
+                autocomplete="off"
+                class="form-control"
+                id="input-city"
+                placeholder="Search city..."
+              />
+            </div>
+            <div class="col-1">
+              <input
+                type="submit"
+                value="🔍"
+                class="btn btn-outline-light mb-3"
+              />
+            </div>
+            <div class="col-1">
+              <button
+                class="btn btn-outline-light mb-3"
+                id="current-location-button"
+              >
+                📍
+              </button>
+            </div>
+            <div class="col-3" id="date">
+              <span class="time" scope="row" id="todays-day">Sunday</span>
+              <span class="time" scope="row" id="current-time">2:30 PM</span>
+            </div>
+          </form>
+
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <h5 class="card-city" id="current-city"></h5>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <span id="weather-description"> </span>
+            </div>
+            <div class="col-7">
+              <span class="card-temperature" id="temperature-number"></span
+              ><span id="celsius"> °C</span>
+              <span id="fahrenheit"> °F</span>
+            </div>
+            <br />
+          </div>
+
+          <ul>
+            <li>☀ Day: <span id="max-temp"> </span>°</li>
+            <li>🌑 Night: <span id="min-temp"> </span>°</li>
+            <li>💨 Wind: <span id="wind"> </span> km/h</li>
+            <li>💧 Humidity: <span id="humidity"> </span>%</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+      let now = new Date();
+      console.log(new Date());
+
+      let day = now.getDay();
+      console.log(day);
+
+      let year = now.getFullYear();
+      console.log(year);
+
+      let month = now.getMonth();
+      console.log(month);
+
+      let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      let dayOfTheWeek = days[now.getDay()];
+
+      let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      let monthName = months[now.getMonth()];
+
+      let date = now.getDate();
+
+      console.log(`Today is ${dayOfTheWeek}, ${monthName} ${date}, ${year}`);
+
+      function formatDate(now) {
+        console.log(`Today is ${dayOfTheWeek}, ${monthName} ${date}, ${year}`);
+      }
+      formatDate(now);
+
+      let todaysDay = document.querySelector("#todays-day");
+
+      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}, ${year}`;
+
+      let hour = now.getHours();
+      if (hour < 10) {
+        hour = `0${hour}`;
+      }
+      let minutes = now.getMinutes();
+      if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
+
+      let exactTime = document.querySelector("#current-time");
+      exactTime.innerHTML = `${hour}:${minutes}`;
+
+      function displayWeatherCondition(response) {
+        document.querySelector("#current-city").innerHTML = response.data.name;
+        console.log(response);
+
+        document.querySelector("#temperature-number").innerHTML = Math.round(
+          response.data.main.temp
+        );
+        document.querySelector("#weather-description").innerHTML =
+          response.data.weather[0].main;
+        document.querySelector("#max-temp").innerHTML = Math.round(
+          response.data.main.temp_max
+        );
+        document.querySelector("#min-temp").innerHTML = Math.round(
+          response.data.main.temp_min
+        );
+        document.querySelector("#humidity").innerHTML =
+          response.data.main.humidity;
+        document.querySelector("#wind").innerHTML = Math.round(
+          response.data.wind.speed
+        );
+      }
+      function searchCity(city) {
+        let apiKey = "c330d6d567e845b62d32598b378046e4";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+      }
+
+      //2. The search function runs...
+      function search(event) {
+        event.preventDefault();
+        let city = document.querySelector("#input-city").value;
+        searchCity(city);
+      }
+
+      //1. the program gets the info from input-form and goes to the Search function.
+      let form = document.querySelector("#input-form");
+      form.addEventListener("submit", search);
+
+      function showPosition(position) {
+        let apiKey = "c330d6d567e845b62d32598b378046e4";
+        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`;
+
+        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+      }
+
+      function getCurrentPosition() {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      }
+
+      let button = document.querySelector("button");
+      button.addEventListener("click", getCurrentPosition);
+
+      searchCity("New York");
+    </script>
+  </body>
+</html>
