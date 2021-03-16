@@ -2,6 +2,7 @@ body {
   margin: 20px auto;
 }
 .border-light {
+  
   height: 480px;
   margin: 0 auto;
   width: 672px;
@@ -9,7 +10,10 @@ body {
 
 .weather-app {
   border: 1px solid #dadde1;
+  border-radius: 8px;
+  height: 480px;
   padding: 20px;
+  width: 672px;
   
 }
 .col-1 {
@@ -63,21 +67,27 @@ ul {
   text-align: left;
 }
 li {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 #wind {
-  font-size: 15px;
+  font-size: 12px;
 }
 #humidity {
-  font-size: 15px;
+  font-size: 12px;
 }
 #max-temp {
-  font-size: 15px;
+  font-size: 12px;
 }
 #min-temp {
-  font-size: 15px;
+  font-size: 12px;
 }
 #repository-link {
+  text-align: center;
+}
+
+#weekly-forecast {
+ font-family: "Oswald", sans-serif;
+  padding-top: 80px;
   text-align: center;
 }
