@@ -79,8 +79,8 @@
               <span id="weather-description"> </span>
             </div>
             <div class="col-7">
-              <span class="card-temperature" id="temperature-number"></span
-              ><span id="celsius"> °C</span>
+              <span class="card-temperature" id="temperature-number"></span>
+              <span id="celsius"> °C |</span>
               <span id="fahrenheit"> °F</span>
             </div>
             <br />
@@ -194,7 +194,7 @@
           response.data.main.temp
         );
         document.querySelector("#weather-description").innerHTML =
-          response.data.weather[0].main;
+          response.data.weather[0].description;
         document.querySelector("#max-temp").innerHTML = Math.round(
           response.data.main.temp_max
         );
