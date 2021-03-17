@@ -4,18 +4,18 @@ body {
 }
 .border-light {
   
-  height: 714px;
+  height: 480px;
   margin: 0 auto;
-  width: 1000px;
+  width: 672px;
 }
 
 .weather-app {
-  background-image : url("pic-1.jpg");
+  
   border: 1px solid #dadde1;
   border-radius: 8px;
-  height: 714px;
+  height: 480px;
   padding: 20px;
-  width: 1000px;
+  width: 672px;
   
 }
 .col-1 {
