@@ -1,20 +1,21 @@
 body {
+  
   margin: 20px auto;
 }
 .border-light {
   
-  height: 480px;
+  height: 714px;
   margin: 0 auto;
-  width: 672px;
+  width: 1000px;
 }
 
 .weather-app {
-  
+  background-image : url("pic-1.jpg");
   border: 1px solid #dadde1;
   border-radius: 8px;
-  height: 480px;
+  height: 714px;
   padding: 20px;
-  width: 672px;
+  width: 1000px;
   
 }
 .col-1 {
