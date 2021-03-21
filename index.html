@@ -11,7 +11,7 @@
       integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="src/stylesChange.css" />
+    <link rel="stylesheet" href="src/style.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -80,8 +80,8 @@
             </div>
             <div class="col-7">
               <span class="card-temperature" id="temperature-number"></span>
-              <span id="celsius"> °C |</span>
-              <span id="fahrenheit"> °F</span>
+              <span href="#" id="celsius-link"> °C |</span>
+              <span href="#" id="fahrenheit-link">°F</span>
             </div>
             <br />
           </div>
@@ -190,6 +190,8 @@
         document.querySelector("#current-city").innerHTML = response.data.name;
         console.log(response);
 
+        celsiusTemperature = response.data.main.temp;
+
         document.querySelector("#temperature-number").innerHTML = Math.round(
           response.data.main.temp
         );
@@ -237,6 +239,37 @@
 
       let button = document.querySelector("button");
       button.addEventListener("click", getCurrentPosition);
+
+      function displayFahrenheitTemperature(event) {
+        event.preventDefault();
+        let temperatureElement = document.querySelector("#temperature-number");
+        let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+        temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+        let fahrenheitLink = document.querySelector("#fahrenheit-link");
+        fahrenheitLink.style = "color: #000000";
+        celsiusLink.style = "color: #C0C0C0";
+      }
+
+      function displayCelsiusTemperature(event) {
+        event.preventDefault();
+        let temperatureElement = document.querySelector("#temperature-number");
+        temperatureElement.innerHTML = Math.round(celsiusTemperature);
+        let celsiusLink = document.querySelector("#celsius-link");
+        celsiusLink.style = "color: #000000";
+        fahrenheitLink.style = "color: #C0C0C0";
+      }
+
+      //Global variable. It can be accessed from any function. It will have no value "null" when page is load.
+      let celsiusTemperature = null;
+
+      //When this is click the funtion displayCelsiusTemperature is called
+      let fahrenheitLink = document.querySelector("#fahrenheit-link");
+      fahrenheitLink.style = "color: #C0C0C0";
+      fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+      let celsiusLink = document.querySelector("#celsius-link");
+      celsiusLink.style = "color: #000000";
+      celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
       searchCity("New York");
     </script>
