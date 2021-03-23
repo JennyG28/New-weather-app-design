@@ -68,10 +68,15 @@
           </form>
 
           <div class="row">
-            <div class="col-6">
+            <div class="col-5">
               <div>
                 <h5 class="card-city" id="current-city"></h5>
               </div>
+            </div>
+            <div class="col-7">
+              <span class="card-temperature" id="temperature-number"></span>
+              <span href="#" id="celsius-link"> °C |</span>
+              <span href="#" id="fahrenheit-link">°F</span>
             </div>
           </div>
           <div class="row">
@@ -79,23 +84,17 @@
               <span id="weather-description"> </span>
             </div>
             <div class="col-7">
-              <span class="card-temperature" id="temperature-number"></span>
-              <span href="#" id="celsius-link"> °C |</span>
-              <span href="#" id="fahrenheit-link">°F</span>
+              <img src="" alt="Clear" id="icon" class="float-left" />
             </div>
-            <br />
           </div>
           <div class="row">
-            <div class="col-5">
+            <div class="col-6">
               <ul>
                 <li>☀ Day: <span id="max-temp"> </span>°</li>
                 <li>🌑 Night: <span id="min-temp"> </span>°</li>
                 <li>💨 Wind: <span id="wind"> </span> km/h</li>
                 <li>💧 Humidity: <span id="humidity"> </span>%</li>
               </ul>
-            </div>
-            <div class="col-7">
-              <img src="" alt="Clear" id="icon" class="float-left" />
             </div>
           </div>
           <div class="row" id="weekly-forecast">
@@ -118,19 +117,22 @@
           <br />
           <div class="row" id="weekly-day">
             <div class="col-2">
-              <span id="day-1">☀ </span>
+              <span id="day-1">D </span>
             </div>
             <div class="col-2">
-              <span id="day-2">☀ </span>
+              <span id="day-2">D </span>
             </div>
             <div class="col-2">
-              <span id="day-3">☀ </span>
+              <span id="day-3">D </span>
             </div>
             <div class="col-2">
-              <span id="day-4">☀ </span>
+              <span id="day-4">D </span>
             </div>
             <div class="col-2">
-              <span id="day-5">☀ </span>
+              <span id="day-5">D </span>
+            </div>
+            <div class="col-2">
+              <img src="" alt="Clear" id="picture" />
             </div>
           </div>
         </div>
