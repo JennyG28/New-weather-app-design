@@ -93,11 +93,14 @@ li {
 #min-temp {
   font-size: 12px;
 }
+#icon {
+  width: 150px;
+}
 #repository-link {
   text-align: center;
 }
 
 #weekly-forecast {
-  padding-top: 80px;
+  padding-top: 20px;
   text-align: center;
 }
