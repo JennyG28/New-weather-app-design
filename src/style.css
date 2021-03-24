@@ -27,13 +27,18 @@ body {
 #date {
   font-family: "Oswald", sans-serif;
   padding: 8px 0;
-  text-align: right;
-  width: 210px;
+  text-align: center;
+  width: 120px;
 }
 
-.time {
-  font-size: 15px;
-  text-align: center;
+#time {
+  font-family: "Ranchers", cursive;
+  font-size: 35px;
+  padding: 8px 0;
+  position: relative;
+  text-align: right;
+  top: -15px;
+  width: 100px;
 }
 
 .card-city {
@@ -41,23 +46,34 @@ body {
   font-size: 45px;
   width: 500px;
 }
+#icon {
+  left: -60px;
+  padding: 0;
+  position: relative;
+  top: -40px;
+  width: 240px;
+}
 #weather-description {
   font-family: "Oswald", sans-serif;
   font-size: 35px;
+  position: relative;
+  top: -180px;
   text-transform: capitalize;
 }
 
 #temperature-number {
   font-family: "Oswald", sans-serif;
-  font-size: 40px;
+  font-size: 50px;
   padding-left: 20px;
+  position: relative;
+  top: -85px;
   text-align: center;
 }
 
 #celsius-link {
   font-family: "Oswald", sans-serif;
   position: relative;
-  top: -18px;
+  top: -105px;
 }
 
 #celsius-link:hover {
@@ -67,7 +83,7 @@ body {
 #fahrenheit-link {
   font-family: "Oswald", sans-serif;
   position: relative;
-  top: -18px;
+  top: -105px;
 }
 #fahrenheit-link:hover {
   cursor: pointer;
@@ -75,13 +91,16 @@ body {
 #picture {
   left: -60px;
   position: relative;
-  top: -300px;
-  width: 160px;
+  top: -450px;
+  width: 140px;
 }
 ul {
+  font-family: "Oswald", sans-serif;
   list-style-type: none;
   margin: 0;
   padding: 0;
+  position: relative;
+  top: -160px;
   text-align: left;
 }
 li {
@@ -100,16 +119,15 @@ li {
 #min-temp {
   font-size: 12px;
 }
-
-#icon {
-  padding: 0;
-  width: 100px;
+#forecast {
+  font-family: "Oswald", sans-serif;
+  padding-top: 20px;
+  position: relative;
+  top: -160px;
+  text-align: center;
 }
 #repository-link {
-  text-align: center;
-}
-
-#weekly-forecast {
-  padding-top: 20px;
-  text-align: center;
+  font-size: 15px;
+  margin-left: 240px;
+  text-align: left;
 }

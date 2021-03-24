@@ -62,8 +62,10 @@
               </button>
             </div>
             <div class="col-3" id="date">
-              <span class="time" scope="row" id="todays-day">Sunday</span>
-              <span class="time" scope="row" id="current-time">2:30 PM</span>
+              <span scope="row" id="todays-day"></span>
+            </div>
+            <div class="col-2" id="time">
+              <span scope="row" id="current-time"></span>
             </div>
           </form>
 
@@ -74,9 +76,7 @@
               </div>
             </div>
             <div class="col-7">
-              <span class="card-temperature" id="temperature-number"></span>
-              <span href="#" id="celsius-link"> °C |</span>
-              <span href="#" id="fahrenheit-link">°F</span>
+              <img src="" alt="Clear" id="icon" class="float-left" />
             </div>
           </div>
           <div class="row">
@@ -84,7 +84,9 @@
               <span id="weather-description"> </span>
             </div>
             <div class="col-7">
-              <img src="" alt="Clear" id="icon" class="float-left" />
+              <span class="card-temperature" id="temperature-number"></span>
+              <span href="#" id="celsius-link"> °C |</span>
+              <span href="#" id="fahrenheit-link">°F</span>
             </div>
           </div>
           <div class="row">
@@ -97,9 +99,10 @@
               </ul>
             </div>
           </div>
-          <div class="row" id="weekly-forecast">
+          <div class="row weekly-forecast" id="forecast">
             <div class="col-2">
               <span id="day-1"> Wed</span>
+              <div id="day-1">D</div>
             </div>
             <div class="col-2">
               <span id="day-2"> Thu</span>
@@ -116,9 +119,7 @@
           </div>
           <br />
           <div class="row" id="weekly-day">
-            <div class="col-2">
-              <span id="day-1">D </span>
-            </div>
+            <div class="col-2"></div>
             <div class="col-2">
               <span id="day-2">D </span>
             </div>
@@ -136,6 +137,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div id="repository-link">
+        <a href="https://github.com/JennyG28?tab=repositories"
+          >Open-source code</a
+        >
+        by Jenny Gomez
       </div>
     </div>
     <script src="src/app.js"></script>

@@ -40,7 +40,7 @@
 
       let todaysDay = document.querySelector("#todays-day");
 
-      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}, ${year}`;
+      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}`;
 
       let hour = now.getHours();
       if (hour < 10) {
@@ -54,6 +54,7 @@
       let exactTime = document.querySelector("#current-time");
       exactTime.innerHTML = `${hour}:${minutes}`;
 
+      
       function displayWeatherCondition(response) {
         document.querySelector("#current-city").innerHTML = response.data.name;
         console.log(response);
@@ -76,16 +77,13 @@
           response.data.main.temp_min
         );
         document.querySelector("#humidity").innerHTML =
-          response.data.main.humidity;
+          response.data.main.humidity
         document.querySelector("#wind").innerHTML = Math.round(
           response.data.wind.speed
         );
+        
+        //Determines background color, main image and icon based on weather description
         let iconElement = document.querySelector("#icon");
-        iconElement.setAttribute(
-          "src",
-          `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-        );
-
         let pictureElement = document.querySelector("#picture");
         let background = response.data.weather[0].icon;
         if (background === "01d"){
@@ -94,11 +92,39 @@
           "src",
           `src/img-1.png`
         );
+         iconElement.setAttribute(
+          "src",
+          `src/day.svg`
+        );
+         } else if (background === "01n"){
+        backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+        pictureElement.setAttribute(
+          "src",
+          `src/img-1.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/night.svg`
+        ); 
         } else if (background === "02d") {
           backgroundImage.style = "background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%)";
            pictureElement.setAttribute(
           "src",
           `src/img-2.png`
+        );
+           iconElement.setAttribute(
+          "src",
+          `src/cloudyday.svg`
+        );
+      } else if (background === "02n") {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-2.png`
+        );
+           iconElement.setAttribute(
+          "src",
+          `src/cloudy-night-1.svg`
         );
         } else if (background === "03d" || background === "04d") {
           backgroundImage.style = "background-image: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%);";
@@ -106,11 +132,59 @@
           "src",
           `src/img-3.png`
         );
-        } else if (background === "09d" || background === "10d" || background === "11d") {
+             iconElement.setAttribute(
+          "src",
+          `src/cloudy.svg`
+        );
+        } else if (background === "03n" || background === "04n") {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-3.png`
+        );
+           iconElement.setAttribute(
+          "src",
+          `src/cloudy-night-3.svg`
+        );
+        } else if (background === "09d" || background === "10d") {
           backgroundImage.style = "background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);";
            pictureElement.setAttribute(
           "src",
           `src/img-4.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/rainy-5.svg`
+        );
+        } else if (background === "09n" || background === "10n") {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-4.png`
+        );
+           iconElement.setAttribute(
+          "src",
+          `src/rainy-5.svg`
+        );
+         } else if (background === "11d" ) {
+          backgroundImage.style = "background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-4.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/thunder.svg`
+        );
+        } else if (background === "11n" ) {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-4.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/thunder.svg`
         );
         } else if (background === "13d") {
           backgroundImage.style = "background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);";
@@ -118,24 +192,56 @@
           "src",
           `src/img-5.png`
         );
+        iconElement.setAttribute(
+          "src",
+          `src/snowy-6.svg`
+        );
+        } else if (background === "13n" ) {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-5.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/snowy-6.svg`
+        );
          } else if (background === "50d") {
-          backgroundImage.style = "background-image: linear-gradient(to top, #ebc0fd 0%, #d9ded8 100%);";
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)";
            pictureElement.setAttribute(
           "src",
           `src/img-6.png`
         );
-        } 
-      
-       
-        
+        iconElement.setAttribute(
+          "src",
+          `src/rainy-4.svg`
+        );
+        } else if (background === "50n" ) {
+          backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
+           pictureElement.setAttribute(
+          "src",
+          `src/img-6.png`
+        );
+         iconElement.setAttribute(
+          "src",
+          `src/rainy-4.svg`
+        );
+        }                 
       }
       
-
+      function displayForecast(response){
+      console.log(response);
+      let forecastElement = document.querySelector("#forecast");
+      }
       function searchCity(city) {
         let apiKey = "c330d6d567e845b62d32598b378046e4";
         //The default temperature unit is °F
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
         axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+        let cnt = 5;
+         apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+
       }
 
       //2. The search function runs...
@@ -195,6 +301,6 @@
       celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
       let backgroundImage = document.querySelector("#background");
-      backgroundImage.style = "background-color: #FFA19F";
+      
 
       searchCity("New York");
