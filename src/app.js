@@ -1,19 +1,9 @@
-      let now = new Date();
-      console.log(new Date());
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+console.log(date);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-      let day = now.getDay();
-      console.log(day);
-
-      let year = now.getFullYear();
-      console.log(year);
-
-      let month = now.getMonth();
-      console.log(month);
-
-      let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      let dayOfTheWeek = days[now.getDay()];
-
-      let months = [
+   let months = [
         "January",
         "February",
         "March",
@@ -27,38 +17,36 @@
         "November",
         "December",
       ];
-      let monthName = months[now.getMonth()];
 
-      let date = now.getDate();
+  let day = days[date.getDay()];
+  let month = months[date.getMonth()];
+  let todaysDate = date.getDate();
+  
+  return `${day}, ${month} ${todaysDate} ${formatHours(timestamp)}`;
+}
 
-      console.log(`Today is ${dayOfTheWeek}, ${monthName} ${date}, ${year}`);
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-      function formatDate(now) {
-        console.log(`Today is ${dayOfTheWeek}, ${monthName} ${date}, ${year}`);
-      }
-      formatDate(now);
+  return `${hours}:${minutes}`;
+}
 
-      let todaysDay = document.querySelector("#todays-day");
-
-      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}`;
-
-      let hour = now.getHours();
-      if (hour < 10) {
-        hour = `0${hour}`;
-      }
-      let minutes = now.getMinutes();
-      if (minutes < 10) {
-        minutes = `0${minutes}`;
-      }
-
-      let exactTime = document.querySelector("#current-time");
-      exactTime.innerHTML = `${hour}:${minutes}`;
-
-      
+      //Display current weather condition
       function displayWeatherCondition(response) {
         document.querySelector("#current-city").innerHTML = response.data.name;
         console.log(response);
 
+        let dateElement = document.querySelector("#date");
+        dateElement.innerHTML = formatDate(response.data.dt * 1000);
+        
         celsiusTemperature = response.data.main.temp;
         let celsiusLink = document.querySelector("#celsius-link");
         celsiusLink.style = "color: #000000";
@@ -132,17 +120,17 @@
           "src",
           `src/img-3.png`
         );
-             iconElement.setAttribute(
+          iconElement.setAttribute(
           "src",
           `src/cloudy.svg`
         );
-        } else if (background === "03n" || background === "04n") {
+        } else if (background === "04n" || background === "03n") {
           backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
            pictureElement.setAttribute(
           "src",
           `src/img-3.png`
         );
-           iconElement.setAttribute(
+          iconElement.setAttribute(
           "src",
           `src/cloudy-night-3.svg`
         );
@@ -207,7 +195,7 @@
           `src/snowy-6.svg`
         );
          } else if (background === "50d") {
-          backgroundImage.style = "background-image: linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)";
+          backgroundImage.style = "background-image: linear-gradient(to right, #868f96 0%, #596164 100%)";
            pictureElement.setAttribute(
           "src",
           `src/img-6.png`
@@ -228,11 +216,35 @@
         );
         }                 
       }
+    
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 5; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2">
+      <h6>
+        ${formatHours(forecast.dt * 1000)}
+      </h6>
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
+  }
+}
       
-      function displayForecast(response){
-      console.log(response);
-      let forecastElement = document.querySelector("#forecast");
-      }
       function searchCity(city) {
         let apiKey = "c330d6d567e845b62d32598b378046e4";
         //The default temperature unit is °F
@@ -276,7 +288,7 @@
         temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
         let fahrenheitLink = document.querySelector("#fahrenheit-link");
         fahrenheitLink.style = "color: #000000";
-        celsiusLink.style = "color: #808080";
+        celsiusLink.style = "color: #696969";
       }
 
       function displayCelsiusTemperature(event) {
@@ -285,7 +297,7 @@
         temperatureElement.innerHTML = Math.round(celsiusTemperature);
         let celsiusLink = document.querySelector("#celsius-link");
         celsiusLink.style = "color: #000000";
-        fahrenheitLink.style = "color: #808080";
+        fahrenheitLink.style = "color: #696969";
       }
 
       //Global variable. It can be accessed from any function. It will have no value "null" when page is load.
@@ -293,7 +305,7 @@
 
       //When this is click the funtion displayCelsiusTemperature is called
       let fahrenheitLink = document.querySelector("#fahrenheit-link");
-      fahrenheitLink.style = "color: #808080";
+      fahrenheitLink.style = "color: #696969";
       fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
       let celsiusLink = document.querySelector("#celsius-link");
@@ -301,6 +313,6 @@
       celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
       let backgroundImage = document.querySelector("#background");
-      
 
       searchCity("New York");
+    

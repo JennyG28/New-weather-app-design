@@ -26,9 +26,9 @@ body {
 
 #date {
   font-family: "Oswald", sans-serif;
-  padding: 8px 0;
+  padding: 8px 0 0 20px;
   text-align: center;
-  width: 120px;
+  width: 150px;
 }
 
 #time {
@@ -50,12 +50,12 @@ body {
   left: -60px;
   padding: 0;
   position: relative;
-  top: -40px;
+  top: -20px;
   width: 240px;
 }
 #weather-description {
   font-family: "Oswald", sans-serif;
-  font-size: 35px;
+  font-size: 30px;
   position: relative;
   top: -180px;
   text-transform: capitalize;
@@ -89,9 +89,9 @@ body {
   cursor: pointer;
 }
 #picture {
-  left: -60px;
+  left: 500px;
   position: relative;
-  top: -450px;
+  top: -510px;
   width: 140px;
 }
 ul {
@@ -100,11 +100,11 @@ ul {
   margin: 0;
   padding: 0;
   position: relative;
-  top: -160px;
+  top: -180px;
   text-align: left;
 }
 li {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #wind {
@@ -119,15 +119,20 @@ li {
 #min-temp {
   font-size: 12px;
 }
+
 #forecast {
   font-family: "Oswald", sans-serif;
-  padding-top: 20px;
+  font-size: 12px;
+  height: 150px;
+  left: -20px;
   position: relative;
-  top: -160px;
+  top: -155px;
   text-align: center;
 }
+
 #repository-link {
   font-size: 15px;
-  margin-left: 240px;
+  left: 365px;
+  position: relative;
   text-align: left;
 }

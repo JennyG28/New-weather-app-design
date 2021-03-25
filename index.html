@@ -31,7 +31,7 @@
 
     <title>My Weather App</title>
   </head>
-  <body>
+<body>
     <div class="container">
       <div class="card border-light">
         <div class="weather-app" id="background">
@@ -62,10 +62,6 @@
               </button>
             </div>
             <div class="col-3" id="date">
-              <span scope="row" id="todays-day"></span>
-            </div>
-            <div class="col-2" id="time">
-              <span scope="row" id="current-time"></span>
             </div>
           </form>
 
@@ -86,7 +82,7 @@
             <div class="col-7">
               <span class="card-temperature" id="temperature-number"></span>
               <span href="#" id="celsius-link"> °C |</span>
-              <span href="#" id="fahrenheit-link">°F</span>
+              <span href="#" id="fahrenheit-link" style="color: rgb(105, 105, 105);">°F</span>
             </div>
           </div>
           <div class="row">
@@ -99,45 +95,14 @@
               </ul>
             </div>
           </div>
-          <div class="row weekly-forecast" id="forecast">
-            <div class="col-2">
-              <span id="day-1"> Wed</span>
-              <div id="day-1">D</div>
-            </div>
-            <div class="col-2">
-              <span id="day-2"> Thu</span>
-            </div>
-            <div class="col-2">
-              <span id="day-3"> Fri</span>
-            </div>
-            <div class="col-2">
-              <span id="day-4"> Sat</span>
-            </div>
-            <div class="col-2">
-              <span id="day-5"> Sun</span>
-            </div>
-          </div>
-          <br />
-          <div class="row" id="weekly-day">
-            <div class="col-2"></div>
-            <div class="col-2">
-              <span id="day-2">D </span>
-            </div>
-            <div class="col-2">
-              <span id="day-3">D </span>
-            </div>
-            <div class="col-2">
-              <span id="day-4">D </span>
-            </div>
-            <div class="col-2">
-              <span id="day-5">D </span>
-            </div>
+          <div class="row weather-forecast" id="forecast"></div>
             <div class="col-2">
               <img src="" alt="Clear" id="picture" />
             </div>
           </div>
         </div>
       </div>
+      <br />
       <div id="repository-link">
         <a href="https://github.com/JennyG28?tab=repositories"
           >Open-source code</a
