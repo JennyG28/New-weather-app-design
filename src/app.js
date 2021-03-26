@@ -1,9 +1,16 @@
-function formatDate(timestamp) {
-  let date = new Date(timestamp);
-console.log(date);
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+let now = new Date();
 
-   let months = [
+      let days = [
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri",
+        "Sat",
+      ];
+      let dayOfTheWeek = days[now.getDay()];
+let months = [
         "January",
         "February",
         "March",
@@ -17,13 +24,24 @@ console.log(date);
         "November",
         "December",
       ];
+      let monthName = months[now.getMonth()];
 
-  let day = days[date.getDay()];
-  let month = months[date.getMonth()];
-  let todaysDate = date.getDate();
-  
-  return `${day}, ${month} ${todaysDate} ${formatHours(timestamp)}`;
-}
+      let date = now.getDate();
+      let todaysDay = document.querySelector("#todays-day");
+
+      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}`;
+
+      let hour = now.getHours();
+      if (hour < 10) {
+        hour = `0${hour}`;
+      }
+      let minutes = now.getMinutes();
+      if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
+
+      let exactTime = document.querySelector("#current-time");
+      exactTime.innerHTML = `${hour}:${minutes}`;
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
@@ -44,8 +62,7 @@ function formatHours(timestamp) {
         document.querySelector("#current-city").innerHTML = response.data.name;
         console.log(response);
 
-        let dateElement = document.querySelector("#date");
-        dateElement.innerHTML = formatDate(response.data.dt * 1000);
+        
         
         celsiusTemperature = response.data.main.temp;
         let celsiusLink = document.querySelector("#celsius-link");
@@ -198,7 +215,7 @@ function formatHours(timestamp) {
           backgroundImage.style = "background-image: linear-gradient(to right, #868f96 0%, #596164 100%)";
            pictureElement.setAttribute(
           "src",
-          `src/img-6.png`
+          `src/img-7.png`
         );
         iconElement.setAttribute(
           "src",
@@ -208,7 +225,7 @@ function formatHours(timestamp) {
           backgroundImage.style = "background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)";
            pictureElement.setAttribute(
           "src",
-          `src/img-6.png`
+          `src/img-7.png`
         );
          iconElement.setAttribute(
           "src",
@@ -222,7 +239,7 @@ function displayForecast(response) {
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  for (let index = 0; index < 5; index++) {
+  for (let index = 0; index < 6; index++) {
     forecast = response.data.list[index];
     forecastElement.innerHTML += `
     <div class="col-2">
@@ -232,8 +249,7 @@ function displayForecast(response) {
       <img
         src="http://openweathermap.org/img/wn/${
           forecast.weather[0].icon
-        }@2x.png"
-      />
+        }@2x.png"/>
       <div class="weather-forecast-temperature">
         <strong>
           ${Math.round(forecast.main.temp_max)}°
@@ -247,11 +263,11 @@ function displayForecast(response) {
       
       function searchCity(city) {
         let apiKey = "c330d6d567e845b62d32598b378046e4";
-        //The default temperature unit is °F
+        
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
         axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
-        let cnt = 5;
-         apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+      
+        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
         axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
 
       }
@@ -271,7 +287,14 @@ function displayForecast(response) {
         let apiKey = "c330d6d567e845b62d32598b378046e4";
         let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`;
 
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+
         axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+
+        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+
       }
 
       function getCurrentPosition() {
@@ -315,4 +338,3 @@ function displayForecast(response) {
       let backgroundImage = document.querySelector("#background");
 
       searchCity("New York");
-    
