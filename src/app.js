@@ -9,7 +9,9 @@ let now = new Date();
         "Fri",
         "Sat",
       ];
-      let dayOfTheWeek = days[now.getDay()];
+     
+let dayOfTheWeek = days[now.getDay()];
+
 let months = [
         "January",
         "February",
@@ -24,24 +26,26 @@ let months = [
         "November",
         "December",
       ];
-      let monthName = months[now.getMonth()];
 
-      let date = now.getDate();
-      let todaysDay = document.querySelector("#todays-day");
+let monthName = months[now.getMonth()];
 
-      todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}`;
+let date = now.getDate();
+let todaysDay = document.querySelector("#todays-day");
 
-      let hour = now.getHours();
+todaysDay.innerHTML = `${dayOfTheWeek}, ${monthName} ${date}`;
+
+let hour = now.getHours();
       if (hour < 10) {
         hour = `0${hour}`;
       }
-      let minutes = now.getMinutes();
+let minutes = now.getMinutes();
       if (minutes < 10) {
         minutes = `0${minutes}`;
       }
 
-      let exactTime = document.querySelector("#current-time");
-      exactTime.innerHTML = `${hour}:${minutes}`;
+let exactTime = document.querySelector("#current-time");
+exactTime.innerHTML = `${hour}:${minutes}`;
+    
 
 function formatHours(timestamp) {
   let date = new Date(timestamp);
@@ -57,40 +61,39 @@ function formatHours(timestamp) {
   return `${hours}:${minutes}`;
 }
 
-      //Display current weather condition
-      function displayWeatherCondition(response) {
-        document.querySelector("#current-city").innerHTML = response.data.name;
-        console.log(response);
+//It fetches current weather condition for searched city
+function displayWeatherCondition(response) {
 
-        
-        
-        celsiusTemperature = response.data.main.temp;
-        let celsiusLink = document.querySelector("#celsius-link");
-        celsiusLink.style = "color: #000000";
-        fahrenheitLink.style = "color: #C0C0C0";
+  document.querySelector("#current-city").innerHTML = response.data.name;
+  console.log(response);
 
-        document.querySelector("#temperature-number").innerHTML = Math.round(
-          response.data.main.temp
-        );
-        document.querySelector("#weather-description").innerHTML =
-          response.data.weather[0].description;
+  celsiusTemperature = response.data.main.temp;
+  let celsiusLink = document.querySelector("#celsius-link");
+  celsiusLink.style = "color: #000000";
+  fahrenheitLink.style = "color: #696969";
 
-        document.querySelector("#max-temp").innerHTML = Math.round(
-          response.data.main.temp_max
-        );
-        document.querySelector("#min-temp").innerHTML = Math.round(
-          response.data.main.temp_min
-        );
-        document.querySelector("#humidity").innerHTML =
-          response.data.main.humidity
-        document.querySelector("#wind").innerHTML = Math.round(
-          response.data.wind.speed
-        );
-        
-        //Determines background color, main image and icon based on weather description
-        let iconElement = document.querySelector("#icon");
-        let pictureElement = document.querySelector("#picture");
-        let background = response.data.weather[0].icon;
+  document.querySelector("#temperature-number").innerHTML = Math.round(
+  response.data.main.temp);
+
+  document.querySelector("#weather-description").innerHTML =
+  response.data.weather[0].description;
+
+  document.querySelector("#max-temp").innerHTML = Math.round(
+  response.data.main.temp_max);
+
+  document.querySelector("#min-temp").innerHTML = Math.round(
+  response.data.main.temp_min);
+
+  document.querySelector("#humidity").innerHTML =
+  response.data.main.humidity
+
+  document.querySelector("#wind").innerHTML = Math.round(
+  response.data.wind.speed);
+
+  //Determines background color, woman image and main icon based on weather description
+  let iconElement = document.querySelector("#icon");
+  let pictureElement = document.querySelector("#picture");
+  let background = response.data.weather[0].icon;
         if (background === "01d"){
         backgroundImage.style = "background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%)";
         pictureElement.setAttribute(
@@ -231,9 +234,10 @@ function formatHours(timestamp) {
           "src",
           `src/rainy-4.svg`
         );
-        }                 
+        }       
       }
-    
+
+//Fetches forecast every three hours
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
@@ -260,81 +264,93 @@ function displayForecast(response) {
   `;
   }
 }
-      
-      function searchCity(city) {
-        let apiKey = "c330d6d567e845b62d32598b378046e4";
+
+//3. The searchCity funtion gets the api information that will send a response to functions: displayWeatherCondition and displayForecast
+function searchCity(city) {
+
+  let apiKey = "c330d6d567e845b62d32598b378046e4";
         
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
-        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
       
-        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
-        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+                
+}
 
-      }
+//2. The search function runs...
+function search(event) {
+  event.preventDefault();
+  let city = document.querySelector("#input-city").value;
 
-      //2. The search function runs...
-      function search(event) {
-        event.preventDefault();
-        let city = document.querySelector("#input-city").value;
-        searchCity(city);
-      }
+  searchCity(city);
+}
+      
 
-      //1. the program gets the info from input-form and goes to the Search function.
-      let form = document.querySelector("#input-form");
-      form.addEventListener("submit", search);
+//1. the program gets the info from input-form and goes to the Search function.
+let form = document.querySelector("#input-form");
+form.addEventListener("submit", search);
 
-      function showPosition(position) {
-        let apiKey = "c330d6d567e845b62d32598b378046e4";
-        let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`;
+      
+//Gets location coordinates and triggers functions displayWeatherCondition and displayForecast
+function showPosition(position) {
+  let apiKey = "c330d6d567e845b62d32598b378046e4";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`;
 
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
 
-        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayWeatherCondition);
 
-        apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-        axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
+  //This part makes sure to display the forecast for the current position
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(displayForecast);
 
-      }
+}
 
-      function getCurrentPosition() {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      }
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
 
-      let button = document.querySelector("button");
-      button.addEventListener("click", getCurrentPosition);
+let button = document.querySelector("button");
+button.addEventListener("click", getCurrentPosition);
 
-      function displayFahrenheitTemperature(event) {
-        event.preventDefault();
-        let temperatureElement = document.querySelector("#temperature-number");
-        let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-        temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-        let fahrenheitLink = document.querySelector("#fahrenheit-link");
-        fahrenheitLink.style = "color: #000000";
-        celsiusLink.style = "color: #696969";
-      }
+//It converts to Fahrenheit and determines font style
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  
+  let temperatureElement = document.querySelector("#temperature-number");
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+  let fahrenheitLink = document.querySelector("#fahrenheit-link");
+  fahrenheitLink.style = "color: #000000";
+  celsiusLink.style = "color: #696969";
+}
 
-      function displayCelsiusTemperature(event) {
-        event.preventDefault();
-        let temperatureElement = document.querySelector("#temperature-number");
-        temperatureElement.innerHTML = Math.round(celsiusTemperature);
-        let celsiusLink = document.querySelector("#celsius-link");
-        celsiusLink.style = "color: #000000";
-        fahrenheitLink.style = "color: #696969";
-      }
+//It assigns Celsius temperature and determines font style
+function displayCelsiusTemperature(event) {
+event.preventDefault();
+        
+  let temperatureElement = document.querySelector("#temperature-number");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+  let celsiusLink = document.querySelector("#celsius-link");
+  celsiusLink.style = "color: #000000";
+  fahrenheitLink.style = "color: #696969";
+}
 
-      //Global variable. It can be accessed from any function. It will have no value "null" when page is load.
-      let celsiusTemperature = null;
+//Global variable. It can be accessed from any function. It will have no value "null" when page is load.
+let celsiusTemperature = null;
 
-      //When this is click the funtion displayCelsiusTemperature is called
-      let fahrenheitLink = document.querySelector("#fahrenheit-link");
-      fahrenheitLink.style = "color: #696969";
-      fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+//When this is clicked the funtion displayFahrenheitTemperature is called
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.style = "color: #696969";
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 
-      let celsiusLink = document.querySelector("#celsius-link");
-      celsiusLink.style = "color: #000000";
-      celsiusLink.addEventListener("click", displayCelsiusTemperature);
+//When this is clicked the funtion displayCelsiusTemperature is called
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.style = "color: #000000";
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-      let backgroundImage = document.querySelector("#background");
+let backgroundImage = document.querySelector("#background");
 
-      searchCity("New York");
+searchCity("New York");
