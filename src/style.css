@@ -145,11 +145,9 @@ h6 {
   width: 70px;
 }
 #repository-link {
-  color: #4d4d4d;
   font-family: Consolas;
   font-size: 15px;
   font-weight: lighter;
   margin: 20px auto;
   text-align: center;
-  text-decoration: none;
 }
